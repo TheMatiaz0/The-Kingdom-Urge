@@ -6,7 +6,7 @@ using Cyberevolver.Unity;
 
 public class ShopView : MonoBehaviour
 {
-	[SerializeField] private Building[] allBuildings;
+	[SerializeField] private Building[] allBuildings = null;
 
 	[SerializeField] private Transform parentSpawner = null;
 
