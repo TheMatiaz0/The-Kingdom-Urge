@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cyberevolver.Unity;
 using Cyberevolver;
+using UnityEngine.UI;
 
-public class Building : MonoBehaviour
+public class Building : MonoBehaviour, IBuyable
 {
 	[SerializeField]
 	private Cint startHp = 100;
@@ -26,8 +27,27 @@ public class Building : MonoBehaviour
 
 	public Cint CurrentHp { get; private set; } = 100;
 
+	public void OnBuy()
+	{
+		if (PlayerInstance.Instance.CurrentMoney >= BuildingPrice)
+		{
+			PlayerInstance.Instance.CurrentMoney -= BuildingPrice;
+			Place();
+		}
+
+		else
+		{
+			Debug.Log("No money, sry buddy.");
+		}
+	}
+
 	private void Start()
 	{
 		CurrentHp = startHp;
+	}
+	
+	private void Place() 
+	{
+		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
 }

@@ -22,7 +22,8 @@ public class ShopView : MonoBehaviour
 			ItemShop newItemShop = newObject.GetComponent<ItemShop>();
 			newItemShop.ItemName.text = b.BuildingName;
 			newItemShop.ItemIcon.sprite = b.BuildingIcon;
-			newItemShop.ItemPrice.text = b.BuildingPrice.ToString();		
+			newItemShop.ItemPrice.text = b.BuildingPrice.ToString();
+			newItemShop.itemBuyAction += () => b.OnBuy();
 		}
 	}
 }

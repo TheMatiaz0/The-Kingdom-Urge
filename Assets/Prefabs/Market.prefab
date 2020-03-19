@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6930014233090594103
 Transform:
@@ -97,6 +97,6 @@ MonoBehaviour:
   startHp:
     _Value: 100
   buildingName: Market
-  buildingIcon: {fileID: 0}
+  buildingIcon: {fileID: 21300000, guid: c37e3d9506c763a408fd3e7bc701f709, type: 3}
   buildingPrice:
-    _Value: 50
+    _Value: 5

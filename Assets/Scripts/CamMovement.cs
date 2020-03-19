@@ -13,13 +13,23 @@ public class CamMovement : MonoBehaviour
     [SerializeField]
     private float zoomOutMax = 8;
 
+    private bool isFocused = false;
+
     protected void Awake()
     {
         thisCamera = this.GetComponent<Camera>();
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        isFocused = focus;
+    }
+
     protected void LateUpdate()
     {
+        if (isFocused || MenuUpdater.Instance.IsPaused)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             touchStart = thisCamera.ScreenToWorldPoint(Input.mousePosition);

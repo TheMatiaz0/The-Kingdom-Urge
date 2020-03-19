@@ -5,10 +5,17 @@ using UnityEngine.UI;
 using Cyberevolver;
 using Cyberevolver.Unity;
 
-public class MenuUpdater : MonoBehaviour
+public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 {
 	[SerializeField]
 	private Text goldInfo = null;
+
+	public bool IsPaused { get; private set; } = true;
+
+	protected void OnEnable()
+	{
+		IsPaused = true;
+	}
 
 	protected void Start()
 	{
@@ -18,6 +25,7 @@ public class MenuUpdater : MonoBehaviour
 	protected void OnDisable()
 	{
 		PlayerInstance.Instance.OnMoneyChanged -= UpdateGoldText;
+		IsPaused = false;
 	}
 
 	public void UpdateGoldText (object s, Cint v)
