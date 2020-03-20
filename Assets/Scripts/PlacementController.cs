@@ -55,7 +55,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			spriteRender.color = Color.green;
 		}
 
-		if (Input.GetMouseButtonDown(0) == true)
+		if (Input.GetMouseButtonDown(0) == true || IsDoubleTap())
 		{
 			RaycastHit2D hit = objToPlace.Ray2DWithoutThis(objToPlace.transform.position, Vector2.down, 200);
 			if (hit.collider.tag != "Grass")
@@ -86,5 +86,22 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 	public bool IsInRange(Vector2 min, Vector2 max, Vector2 value)
 	{
 		return new Vector2(Math.Max(min.x, Math.Min(max.x, value.x)), Math.Max(min.y, Math.Min(max.y, value.y))) == value;
+	}
+
+	public bool IsDoubleTap()
+	{
+		bool result = false;
+		float MaxTimeWait = 1;
+		float VariancePosition = 1;
+
+		if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+		{
+			float DeltaTime = Input.GetTouch(0).deltaTime;
+			float DeltaPositionLenght = Input.GetTouch(0).deltaPosition.magnitude;
+
+			if (DeltaTime > 0 && DeltaTime < MaxTimeWait && DeltaPositionLenght < VariancePosition)
+				result = true;
+		}
+		return result;
 	}
 }

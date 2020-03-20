@@ -13,6 +13,8 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	public Cint CurrentMoney { get { return _CurrentMoney; } set { _CurrentMoney = value; OnMoneyChanged.Invoke(this, _CurrentMoney); } }
 	private Cint _CurrentMoney;
 
+	public Cint MoneyPerSecond { get; set; }
+
 	public Cint MoneyToGet { get; private set; } = 1;
 
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
@@ -20,6 +22,20 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	public void GatherMoneyBtn ()
 	{
 		CurrentMoney += MoneyToGet;
+	}
+
+	protected void Start()
+	{
+		InvokeRepeating((m) => StartCoroutine(AddMoneyPerSecond()), TimeSpan.FromSeconds(1));
+	}
+
+
+	public void AddMoneyPerSecond()
+	{
+		// Cint t = 0;
+		// while ()
+
+		// CurrentMoney += MoneyPerSecond;
 	}
 
 	protected void Update()

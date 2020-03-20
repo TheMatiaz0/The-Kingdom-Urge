@@ -41,6 +41,26 @@ public class Building : MonoBehaviour, IBuyable
 		}
 	}
 
+	public virtual void OnPlace()
+	{
+		
+	}
+
+	public virtual void OnDamageFull()
+	{
+		Destroy(this.gameObject);
+	}
+
+	public void GetDamage (Cint dmgHp)
+	{
+		CurrentHp -= dmgHp;
+
+		if (CurrentHp <= 0)
+		{
+			OnDamageFull();
+		}
+	}
+
 	private void Start()
 	{
 		CurrentHp = startHp;
@@ -77,6 +97,7 @@ public class Building : MonoBehaviour, IBuyable
 		{
 			case "Grass":
 				PlacementController.Instance.OnCollision();
+				OnPlace();
 				break;
 		}
 	}

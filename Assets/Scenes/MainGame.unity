@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allBuildings:
-  - {fileID: 6568925687275982446, guid: 202f96377aa646e4183ea58488e322fe, type: 3}
+  - {fileID: 7437042460638331310, guid: 202f96377aa646e4183ea58488e322fe, type: 3}
   - {fileID: 7784108271517389360, guid: d49781a9cab3abb40b3f4d3ef760accc, type: 3}
   parentSpawner: {fileID: 463919168}
   shopItem: {fileID: 8908978069660080463, guid: d9c13594e4846bc45900033154521952,
@@ -4312,6 +4312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784108271517389360, guid: d49781a9cab3abb40b3f4d3ef760accc,
+        type: 3}
+      propertyPath: startHp._Value
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d49781a9cab3abb40b3f4d3ef760accc, type: 3}
