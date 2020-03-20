@@ -50,4 +50,34 @@ public class Building : MonoBehaviour, IBuyable
 	{
 		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		switch (collision.tag)
+		{
+			case "Building":
+				PlacementController.Instance.WrongCollision = true;
+				break;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		switch (collision.tag)
+		{
+			case "Building":
+				PlacementController.Instance.WrongCollision = false;
+				break;
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		switch (collision.gameObject.tag)
+		{
+			case "Grass":
+				PlacementController.Instance.OnCollision();
+				break;
+		}
+	}
 }

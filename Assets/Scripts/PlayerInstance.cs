@@ -21,4 +21,12 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	{
 		CurrentMoney += MoneyToGet;
 	}
+
+	protected void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			MenuUpdater.Instance.gameObject.SetActive(true);
+		}
+	}
 }

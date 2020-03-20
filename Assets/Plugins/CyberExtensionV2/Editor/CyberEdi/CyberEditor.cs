@@ -144,24 +144,34 @@ namespace Cyberevolver.EditorUnity
         {
             toolbarElement.AddOrSet(id, elements);
         }
-      
+
         public Type GetFinalTargetType()
         {
-           Type type= this.Target.GetType();
-            foreach(object element in deepWay)
+            Type type = this.Target.GetType();
+            foreach (object element in deepWay)
             {
-                if(element is int)
+                if (element is int)
                 {
                     type = type.GetElementType();
                 }
                 else
                 {
-                    type = type.GetField(element.ToString(), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
+                    FieldInfo nField = null;
+                    while (nField == null)
+                    {
+                        nField = type.GetField(element.ToString(), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                        type = type.BaseType;
+                        if (type == null)
+                            throw new Exception("Type has not found");
+                    }
+                    type = nField.FieldType;
+
                 }
-                
+
             }
             return type;
         }
+
         public void Active()
         {
 

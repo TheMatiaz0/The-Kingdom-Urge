@@ -14,6 +14,9 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 
 	protected void OnEnable()
 	{
+		if (PlayerInstance.Instance != null)
+			PlayerInstance.Instance.OnMoneyChanged += UpdateGoldText;
+
 		IsPaused = true;
 	}
 
@@ -21,6 +24,7 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	{
 		PlayerInstance.Instance.OnMoneyChanged += UpdateGoldText;
 	}
+
 
 	protected void OnDisable()
 	{

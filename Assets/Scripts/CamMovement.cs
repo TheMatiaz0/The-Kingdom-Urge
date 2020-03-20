@@ -27,7 +27,7 @@ public class CamMovement : MonoBehaviour
 
     protected void LateUpdate()
     {
-        if (isFocused || MenuUpdater.Instance.IsPaused)
+        if (isFocused == false || MenuUpdater.Instance.IsPaused)
             return;
 
         if (Input.GetMouseButtonDown(0))
