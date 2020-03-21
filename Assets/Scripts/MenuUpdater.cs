@@ -18,19 +18,7 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 
 	protected void OnEnable()
 	{
-		if (PlayerInstance.Instance != null)
-		{
-			PlayerInstance.Instance.OnMoneyChanged += UpdateMoneyText;
-			PlayerInstance.Instance.OnMoneyPerSecondChanged += UpdatePerSecondText;
-		}
-
 		IsPaused = true;
-	}
-
-	protected void Start()
-	{
-		PlayerInstance.Instance.OnMoneyChanged += UpdateMoneyText;
-		// player.OnMoneyPerSecondChanged += UpdatePerSecondText;
 	}
 
 	public void UpdatePerSecondText(object s, double v)
@@ -44,11 +32,8 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 		player.CurrentMoney += player.MoneyPerClick;
 	}
 
-
 	protected void OnDisable()
 	{
-		PlayerInstance.Instance.OnMoneyChanged -= UpdateMoneyText;
-		PlayerInstance.Instance.OnMoneyPerSecondChanged -= UpdatePerSecondText;
 		IsPaused = false;
 	}
 

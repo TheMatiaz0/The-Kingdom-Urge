@@ -19,6 +19,16 @@ public class Building : MonoBehaviour, IBuyable
 	[SerializeField]
 	private Cint buildingPrice = 10;
 
+	[SerializeField]
+	private Transform buildingStartX = null;
+
+	public Transform BuildingStartX => buildingStartX;
+
+	[SerializeField]
+	private Transform buildingEndX = null;
+
+	public Transform BuildingEndX => buildingEndX;
+
 	public Cint BuildingPrice => buildingPrice;
 
 	public Sprite BuildingIcon => buildingIcon;
@@ -29,23 +39,28 @@ public class Building : MonoBehaviour, IBuyable
 
 	public void OnBuy()
 	{
+		Place();
+	}
+
+	public bool CanBuy ()
+	{
 		PlayerInstance player = PlayerInstance.Instance;
 
 		if (player.CurrentMoney >= BuildingPrice)
 		{
 			player.CurrentMoney -= BuildingPrice;
-			Place();
+			return true;
 		}
 
 		else
 		{
 			Debug.Log("No money, sry buddy.");
+			return false;
 		}
 	}
 
 	public virtual void OnPlace()
 	{
-		
 	}
 
 	public virtual void OnDamageFull()
@@ -73,7 +88,7 @@ public class Building : MonoBehaviour, IBuyable
 		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
 
-	/*
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		switch (collision.tag)
@@ -93,7 +108,6 @@ public class Building : MonoBehaviour, IBuyable
 				break;
 		}
 	}
-	*/
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{

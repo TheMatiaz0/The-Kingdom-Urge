@@ -19,7 +19,12 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 	[SerializeField]
 	private Transform maxPoint = null;
 
+	private Building b = null;
+
 	public bool WrongCollision { get; set; }
+
+	private RaycastHit2D hitLeft;
+	private RaycastHit2D hitRight;
 
 	public void SetupPlacement(GameObject prefab)
 	{
@@ -30,6 +35,16 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 		spriteRender.sortingOrder = 1;
 		rb2D = objToPlace.GetComponent<Rigidbody2D>();
 		rb2D.bodyType = RigidbodyType2D.Dynamic;
+		b = objToPlace.GetComponent<Building>();
+	}
+
+	protected void FixedUpdate()
+	{
+		if (objToPlace == null)
+			return;
+
+		hitLeft = objToPlace.Ray2DWithoutThis(b.BuildingStartX.position, Vector2.down, 200);
+		hitRight = objToPlace.Ray2DWithoutThis(b.BuildingEndX.position, Vector2.down, 200);
 	}
 
 	protected void Update()
@@ -44,7 +59,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			objToPlace.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
 
-		if (WrongCollision == true || IsInRange(minPoint.position, maxPoint.position, objToPlace.transform.position) == false)
+		if (hitLeft.transform?.tag != "Grass" || hitRight.transform?.tag != "Grass" || WrongCollision == true || IsInRange(minPoint.position, maxPoint.position, objToPlace.transform.position) == false)
 		{
 			spriteRender.color = Color.red;
 			return;
@@ -55,10 +70,9 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			spriteRender.color = Color.green;
 		}
 
-		if (Input.GetMouseButtonDown(0) == true || IsDoubleTap())
+		if (Input.GetMouseButtonDown(0) == true)
 		{
-			RaycastHit2D hit = objToPlace.Ray2DWithoutThis(objToPlace.transform.position, Vector2.down, 200);
-			if (hit.collider.tag != "Grass")
+			if (b.CanBuy() == false)
 			{
 				return;
 			}
@@ -67,15 +81,20 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			{
 				spriteRender.color = Color.white;
 				spriteRender.sortingOrder = 0;
+				spriteRender = null;
 			}
 
 			objToPlace = null;
-			spriteRender = null;
 		}
 	}
 
 	public void OnCollision()
 	{
+		if (objToPlace != null)
+		{
+			return;
+		}
+
 		if (rb2D != null)
 		{
 			rb2D.bodyType = RigidbodyType2D.Kinematic;
@@ -86,22 +105,5 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 	public bool IsInRange(Vector2 min, Vector2 max, Vector2 value)
 	{
 		return new Vector2(Math.Max(min.x, Math.Min(max.x, value.x)), Math.Max(min.y, Math.Min(max.y, value.y))) == value;
-	}
-
-	public bool IsDoubleTap()
-	{
-		bool result = false;
-		float MaxTimeWait = 1;
-		float VariancePosition = 1;
-
-		if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-		{
-			float DeltaTime = Input.GetTouch(0).deltaTime;
-			float DeltaPositionLenght = Input.GetTouch(0).deltaPosition.magnitude;
-
-			if (DeltaTime > 0 && DeltaTime < MaxTimeWait && DeltaPositionLenght < VariancePosition)
-				result = true;
-		}
-		return result;
 	}
 }

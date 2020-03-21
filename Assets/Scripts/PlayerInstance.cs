@@ -8,13 +8,10 @@ using System;
 
 public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 {
-	public event EventHandler<double> OnMoneyChanged = delegate { };
-	public event EventHandler<double> OnMoneyPerSecondChanged = delegate { };
-
-	public double CurrentMoney { get { return _CurrentMoney; } set { if (_CurrentMoney != value) { _CurrentMoney = value; } OnMoneyChanged.Invoke(this, _CurrentMoney); } }
+	public double CurrentMoney { get { return _CurrentMoney; } set { if (_CurrentMoney != value) { _CurrentMoney = value; } MenuUpdater.Instance.UpdateMoneyText(this, _CurrentMoney); } }
 	private double _CurrentMoney;
 
-	public double MoneyPerSecond { get { return _MoneyPerSecond; } set { if (_MoneyPerSecond != value) { _MoneyPerSecond = value; } OnMoneyPerSecondChanged.Invoke(this, _MoneyPerSecond); } }
+	public double MoneyPerSecond { get { return _MoneyPerSecond; } set { if (_MoneyPerSecond != value) { _MoneyPerSecond = value; } MenuUpdater.Instance.UpdatePerSecondText(this, _MoneyPerSecond); } }
 	private double _MoneyPerSecond;
 
 	public Cint MoneyPerClick { get; private set; } = 1;
@@ -23,16 +20,21 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 
 	protected void Start()
 	{
-		MoneyPerSecond = 1;
+		// MoneyPerSecond = 1;
 	}
 
 	protected void Update()
 	{
-		CurrentMoney += Time.deltaTime * MoneyPerSecond;
+		UpdateMoneyPerSecond();
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			MenuUpdater.Instance.gameObject.SetActive(true);
 		}
+	}
+
+	private void UpdateMoneyPerSecond ()
+	{
+		CurrentMoney += Time.deltaTime * MoneyPerSecond;
 	}
 }

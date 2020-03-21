@@ -6,7 +6,7 @@ public class Castle : Building
 {
 	public override void OnPlace()
 	{
-
+		base.OnPlace();
 	}
 
 	public override void OnDamageFull()

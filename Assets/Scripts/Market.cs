@@ -8,8 +8,16 @@ public class Market : Building
 	[SerializeField]
 	private double moneyPerSecond = 1;
 
+	private bool onlyOnce = false;
+
 	public override void OnPlace()
 	{
-		PlayerInstance.Instance.MoneyPerSecond += moneyPerSecond;
+		base.OnPlace();
+
+		if (onlyOnce == false)
+		{
+			PlayerInstance.Instance.MoneyPerSecond += moneyPerSecond;
+			onlyOnce = true;
+		}
 	}
 }
