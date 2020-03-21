@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 3508364667666355078}
   - component: {fileID: 3508364667666355079}
   - component: {fileID: 7784108271517389360}
-  - component: {fileID: 7061602201266533116}
   - component: {fileID: 7505271034739901638}
   - component: {fileID: 2548501699587561547}
   m_Layer: 0
@@ -185,32 +184,6 @@ MonoBehaviour:
   buildingIcon: {fileID: 21300000, guid: 40e87d6d0f1ea4442a31509780b1a049, type: 3}
   buildingPrice:
     _Value: 9999
---- !u!61 &7061602201266533116
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3508364667666355077}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.4, y: 6.133333}
-    newSize: {x: 1.26, y: 0.92}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.4, y: 6.133333}
-  m_EdgeRadius: 0
 --- !u!50 &7505271034739901638
 Rigidbody2D:
   serializedVersion: 4

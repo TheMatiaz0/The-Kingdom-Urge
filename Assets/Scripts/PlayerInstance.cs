@@ -8,43 +8,28 @@ using System;
 
 public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 {
-	public EventHandler<Cint> OnMoneyChanged = delegate { };
+	public event EventHandler<double> OnMoneyChanged = delegate { };
+	public event EventHandler<double> OnMoneyPerSecondChanged = delegate { };
 
-	public Cint CurrentMoney { get { return _CurrentMoney; } set { _CurrentMoney = value; OnMoneyChanged.Invoke(this, _CurrentMoney); } }
-	private Cint _CurrentMoney;
+	public double CurrentMoney { get { return _CurrentMoney; } set { if (_CurrentMoney != value) { _CurrentMoney = value; } OnMoneyChanged.Invoke(this, _CurrentMoney); } }
+	private double _CurrentMoney;
 
-	public Cint MoneyPerSecond { get; set; } = 20;
+	public double MoneyPerSecond { get { return _MoneyPerSecond; } set { if (_MoneyPerSecond != value) { _MoneyPerSecond = value; } OnMoneyPerSecondChanged.Invoke(this, _MoneyPerSecond); } }
+	private double _MoneyPerSecond;
 
 	public Cint MoneyPerClick { get; private set; } = 1;
 
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
 
-	public void GatherMoneyBtn ()
-	{
-		CurrentMoney += MoneyPerClick;
-	}
-
 	protected void Start()
 	{
-		InvokeRepeating((m) => StartCoroutine(AddMoneyPerSecond()), TimeSpan.FromSeconds(1));
-	}
-
-
-	public IEnumerator AddMoneyPerSecond()
-	{
-		Cint i = 1;
-
-		while (i < MoneyPerSecond)
-		{
-			CurrentMoney += 1;
-			i++;
-
-			yield return Async.Wait(TimeSpan.FromMilliseconds(900));
-		}
+		MoneyPerSecond = 1;
 	}
 
 	protected void Update()
 	{
+		CurrentMoney += Time.deltaTime * MoneyPerSecond;
+
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			MenuUpdater.Instance.gameObject.SetActive(true);

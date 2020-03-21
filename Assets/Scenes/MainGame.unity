@@ -1064,22 +1064,22 @@ PrefabInstance:
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 274.2
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -74.630005
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 548.4
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 85.26
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
@@ -1089,7 +1089,7 @@ PrefabInstance:
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
@@ -1099,7 +1099,7 @@ PrefabInstance:
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8908978069660080456, guid: d9c13594e4846bc45900033154521952,
         type: 3}
@@ -3043,6 +3043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldInfo: {fileID: 266836117}
+  perSecondInfo: {fileID: 1195114476}
 --- !u!1 &1377133334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3176,7 +3177,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066129375}
+      - m_Target: {fileID: 1356682903}
         m_MethodName: GatherMoneyBtn
         m_Mode: 1
         m_Arguments:

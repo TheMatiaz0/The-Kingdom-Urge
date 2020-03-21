@@ -17,7 +17,7 @@ public class Building : MonoBehaviour, IBuyable
 	private Sprite buildingIcon = null;
 
 	[SerializeField]
-	private Cint buildingPrice;
+	private Cint buildingPrice = 10;
 
 	public Cint BuildingPrice => buildingPrice;
 
@@ -29,9 +29,11 @@ public class Building : MonoBehaviour, IBuyable
 
 	public void OnBuy()
 	{
-		if (PlayerInstance.Instance.CurrentMoney >= BuildingPrice)
+		PlayerInstance player = PlayerInstance.Instance;
+
+		if (player.CurrentMoney >= BuildingPrice)
 		{
-			PlayerInstance.Instance.CurrentMoney -= BuildingPrice;
+			player.CurrentMoney -= BuildingPrice;
 			Place();
 		}
 
@@ -71,6 +73,7 @@ public class Building : MonoBehaviour, IBuyable
 		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
 
+	/*
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		switch (collision.tag)
@@ -90,6 +93,7 @@ public class Building : MonoBehaviour, IBuyable
 				break;
 		}
 	}
+	*/
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{

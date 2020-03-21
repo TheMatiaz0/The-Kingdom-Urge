@@ -10,13 +10,13 @@ public class Enemy : MonoBehaviour
 	private Rigidbody2D rb2D = null;
 
 	[SerializeField]
-	private float speed;
+	private float speed = 10;
 
 	[SerializeField]
-	private Direction targetDirection;
+	private Direction targetDirection = Direction.Right;
 
 	[SerializeField]
-	private Cint takeDmg;
+	private Cint takeDmg = 10;
 
 	protected void FixedUpdate()
 	{
