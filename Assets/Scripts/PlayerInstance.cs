@@ -13,15 +13,15 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	public Cint CurrentMoney { get { return _CurrentMoney; } set { _CurrentMoney = value; OnMoneyChanged.Invoke(this, _CurrentMoney); } }
 	private Cint _CurrentMoney;
 
-	public Cint MoneyPerSecond { get; set; }
+	public Cint MoneyPerSecond { get; set; } = 20;
 
-	public Cint MoneyToGet { get; private set; } = 1;
+	public Cint MoneyPerClick { get; private set; } = 1;
 
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
 
 	public void GatherMoneyBtn ()
 	{
-		CurrentMoney += MoneyToGet;
+		CurrentMoney += MoneyPerClick;
 	}
 
 	protected void Start()
@@ -30,12 +30,17 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	}
 
 
-	public void AddMoneyPerSecond()
+	public IEnumerator AddMoneyPerSecond()
 	{
-		// Cint t = 0;
-		// while ()
+		Cint i = 1;
 
-		// CurrentMoney += MoneyPerSecond;
+		while (i < MoneyPerSecond)
+		{
+			CurrentMoney += 1;
+			i++;
+
+			yield return Async.Wait(TimeSpan.FromMilliseconds(900));
+		}
 	}
 
 	protected void Update()
