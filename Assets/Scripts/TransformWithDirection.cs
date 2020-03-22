@@ -13,7 +13,7 @@ public class TransformWithDirection
 	public Transform ObjectTransform => objectTransform;
 
 	[SerializeField]
-	private Vector2 moveDirection = Vector2.right;
+	private Direction moveDirection = Direction.Right;
 
-	public Vector2 MoveDirection => moveDirection;
+	public Direction MoveDirection => moveDirection;
 }

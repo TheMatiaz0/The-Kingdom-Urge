@@ -4,6 +4,7 @@ using UnityEngine;
 using Cyberevolver.Unity;
 using Cyberevolver;
 using UnityEngine.UI;
+using System;
 
 public class Building : MonoBehaviour, IBuyable
 {
@@ -71,23 +72,38 @@ public class Building : MonoBehaviour, IBuyable
 	public void GetDamage (Cint dmgHp)
 	{
 		CurrentHp -= dmgHp;
+		Debug.Log($"{this.gameObject.name}: {CurrentHp}");
 
 		if (CurrentHp <= 0)
 		{
 			OnDamageFull();
+			StopAllCoroutines();
+			return;
 		}
+
+		StartCoroutine(QuickColorChange());
 	}
 
-	private void Start()
+	private IEnumerator QuickColorChange()
+	{
+		LeanTween.color(this.gameObject, Color.red, 0.1f);
+		yield return Async.Wait(TimeSpan.FromSeconds(1));
+		LeanTween.color(this.gameObject, Color.white, 2f);
+	}
+
+	public virtual void Start()
 	{
 		CurrentHp = startHp;
+	}
+
+	public virtual void Update ()
+	{
 	}
 	
 	private void Place() 
 	{
 		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
-
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

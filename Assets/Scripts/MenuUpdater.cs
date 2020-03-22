@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
@@ -13,6 +14,12 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 
 	[SerializeField]
 	private Text perSecondInfo = null;
+
+	[SerializeField]
+	private LeanTweenType easeType;
+
+	[SerializeField]
+	private GameObject coinButton = null;
 
 	public bool IsPaused { get; private set; } = true;
 
@@ -40,5 +47,10 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	public void UpdateMoneyText(object s, double v)
 	{
 		goldInfo.text = $"{Math.Round(v)} gold";
+	}
+
+	public void OnCoinPointerEnter ()
+	{
+		LeanTween.scale(coinButton, new Vector2(2, 2), 5).setEase(easeType);
 	}
 }

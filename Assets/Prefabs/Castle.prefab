@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3508364667666355078}
   - component: {fileID: 3508364667666355079}
-  - component: {fileID: 7784108271517389360}
+  - component: {fileID: 3901751005134638637}
   - component: {fileID: 7505271034739901638}
   - component: {fileID: 2548501699587561547}
   - component: {fileID: 2913854832551379480}
@@ -146,6 +146,7 @@ Transform:
   - {fileID: 3508364666703840516}
   - {fileID: 5735717600023644242}
   - {fileID: 4264844032433203679}
+  - {fileID: 2563294266444290100}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -199,7 +200,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7784108271517389360
+--- !u!114 &3901751005134638637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,17 +209,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 3508364667666355077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a1fad8e27079e4f99e1d87ac1f0e3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 39419ee6b9cf14e4791b7b4d2e8c0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startHp:
-    _Value: 9999
+    _Value: 200
   buildingName: Castle
   buildingIcon: {fileID: 21300000, guid: 40e87d6d0f1ea4442a31509780b1a049, type: 3}
   buildingPrice:
     _Value: 10
   buildingStartX: {fileID: 5735717600023644242}
   buildingEndX: {fileID: 4264844032433203679}
+  range: 40
+  shootTimerMax:
+    miliseconds: 480
+    seconds: 0
+    minutes: 0
+    hour: 0
+    day: 0
+    precision: 1
+  shootPoint: {fileID: 2563294266444290100}
+  bulletPrefab: {fileID: 5271943028461232893, guid: 636720599623983488c1fcd69c54d460,
+    type: 3}
 --- !u!50 &7505271034739901638
 Rigidbody2D:
   serializedVersion: 4
@@ -292,6 +304,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.4, y: 6.133333}
   m_EdgeRadius: 0
+--- !u!1 &4623291691618094160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2563294266444290100}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &2563294266444290100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4623291691618094160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3508364667666355078}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4799519379547505682
 GameObject:
   m_ObjectHideFlags: 0

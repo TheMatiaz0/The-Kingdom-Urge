@@ -18,11 +18,6 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
 
-	protected void Start()
-	{
-		// MoneyPerSecond = 1;
-	}
-
 	protected void Update()
 	{
 		UpdateMoneyPerSecond();

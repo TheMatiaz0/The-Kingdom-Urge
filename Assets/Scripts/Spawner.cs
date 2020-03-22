@@ -8,7 +8,7 @@ using System.Linq;
 
 public class Spawner : AutoInstanceBehaviour<Spawner>
 {
-	public List<GameObject> spawnedEnemies = new List<GameObject>();
+	public List<Enemy> SpawnedEnemies { get; private set; } = new List<Enemy>();
 
 	public enum SpawnState { SPAWNING, WAITING, COUNTING };
 
@@ -43,7 +43,7 @@ public class Spawner : AutoInstanceBehaviour<Spawner>
 
 			state = SpawnState.WAITING;
 
-			yield return new WaitWhile(EnemyisAlive);
+			yield return new WaitWhile(AnyEnemyisAlive);
 
 			state = SpawnState.COUNTING;
 
@@ -61,20 +61,37 @@ public class Spawner : AutoInstanceBehaviour<Spawner>
 		}
 	}
 
-	private bool EnemyisAlive()
+	private bool AnyEnemyisAlive()
 	{
-		spawnedEnemies = spawnedEnemies.Where(e => e != null).ToList();
+		SpawnedEnemies = SpawnedEnemies.Where(e => e != null).ToList();
 
-		return spawnedEnemies.Count > 0;
+		return SpawnedEnemies.Count > 0;
+	}
+
+	public Enemy GetClosestEnemy(Vector2 currentPosition, float range)
+	{
+		Enemy bestTarget = null;
+		foreach (Enemy enemy in SpawnedEnemies)
+		{
+			Vector2 directionToTarget = (Vector2)enemy.transform.position - currentPosition;
+			float dSqrToTarget = directionToTarget.sqrMagnitude;
+			if (dSqrToTarget < range)
+			{
+				range = dSqrToTarget;
+				bestTarget = enemy;
+			}
+		}
+
+		return bestTarget;
 	}
 
 	private void SpawnEnemy()
 	{
-		GameObject tempEnemy;
+		Enemy tempEnemy;
 		int t = UnityEngine.Random.Range(0, enemySpawners.Length);
 		TransformWithDirection obj = enemySpawners[t];
 		Vector2 pos = obj.ObjectTransform.position;
-		spawnedEnemies.Add(tempEnemy = Instantiate(enemyType, pos, Quaternion.identity));
-		tempEnemy.GetComponent<Enemy>().SetupEnemy(obj.MoveDirection);
+		SpawnedEnemies.Add(tempEnemy = Instantiate(enemyType, pos, Quaternion.identity).GetComponent<Enemy>());
+		tempEnemy.SetupEnemy(obj.MoveDirection);
 	}
 }
