@@ -31,6 +31,11 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 		{
 			MenuUpdater.Instance.gameObject.SetActive(true);
 		}
+
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			Spawner.Instance.StartSpawn();
+		}
 	}
 
 	private void UpdateMoneyPerSecond ()

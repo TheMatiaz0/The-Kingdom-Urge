@@ -18,6 +18,11 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private Cint takeDmg = 10;
 
+	public void SetupEnemy (Direction dir)
+	{
+		targetDirection = dir;
+	}
+
 	protected void FixedUpdate()
 	{
 		rb2D.MovePosition((Vector2)transform.position + targetDirection * speed * Time.deltaTime);
