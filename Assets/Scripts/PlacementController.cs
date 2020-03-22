@@ -28,7 +28,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 
 	public void SetupPlacement(GameObject prefab)
 	{
-		MenuUpdater.Instance.gameObject.SetActive(false);
+		MenuUpdater.Instance.ChangeViewToActive();
 		objToPlace = Instantiate(prefab, GameObject.FindGameObjectWithTag("BuildingList").transform);
 		spriteRender = objToPlace.GetComponent<SpriteRenderer>();
 		spriteRender.color = Color.green;

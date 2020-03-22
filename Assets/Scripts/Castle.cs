@@ -57,6 +57,6 @@ public class Castle : Building
 
 	public override void OnDamageFull()
 	{
-		Debug.Log("You lose, mate.");
+		PlayerInstance.Instance.SetGameOver();
 	}
 }

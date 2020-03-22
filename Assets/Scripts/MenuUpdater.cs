@@ -16,10 +16,22 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	private Text perSecondInfo = null;
 
 	[SerializeField]
-	private LeanTweenType easeType;
+	private LeanTweenType easeTypeIn;
+
+	[SerializeField]
+	private LeanTweenType easeTypeOut;
+
+	[SerializeField]
+	private float animationSpeed = 1;
 
 	[SerializeField]
 	private GameObject coinButton = null;
+
+	[SerializeField]
+	private Vector2 scale;
+
+	[SerializeField]
+	private GameObject activeUI = null;
 
 	public bool IsPaused { get; private set; } = true;
 
@@ -51,6 +63,17 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 
 	public void OnCoinPointerEnter ()
 	{
-		LeanTween.scale(coinButton, new Vector2(2, 2), 5).setEase(easeType);
+		LeanTween.scale(coinButton, scale, animationSpeed).setEase(easeTypeIn);
+	}
+
+	public void OnCoinPointerExit ()
+	{
+		LeanTween.scale(coinButton, new Vector2(1, 1), animationSpeed).setEase(easeTypeOut);
+	}
+
+	public void ChangeViewToActive ()
+	{
+		activeUI.SetActive(true);
+		this.gameObject.SetActive(false);
 	}
 }

@@ -16,16 +16,21 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 
 	public Cint MoneyPerClick { get; private set; } = 1;
 
+	public bool IsGameOver { get; private set; }
+
+	[SerializeField]
+	private FreezeMenu gameOverManager = null;
+
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
 
 	protected void Update()
 	{
-		UpdateMoneyPerSecond();
-
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (IsGameOver)
 		{
-			MenuUpdater.Instance.gameObject.SetActive(true);
+			return;
 		}
+
+		UpdateMoneyPerSecond();
 
 		if (Input.GetKeyDown(KeyCode.V))
 		{
@@ -36,5 +41,12 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	private void UpdateMoneyPerSecond ()
 	{
 		CurrentMoney += Time.deltaTime * MoneyPerSecond;
+	}
+
+	public void SetGameOver ()
+	{
+		IsGameOver = true;
+		MenuUpdater.Instance?.gameObject?.SetActive(false);
+		gameOverManager.EnableMenuWithPause(true);
 	}
 }
