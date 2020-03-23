@@ -73,6 +73,11 @@ public class Spawner : AutoInstanceBehaviour<Spawner>
 		Enemy bestTarget = null;
 		foreach (Enemy enemy in SpawnedEnemies)
 		{
+			if (enemy.gameObject == null)
+			{
+				continue;
+			}
+
 			Vector2 directionToTarget = (Vector2)enemy.transform.position - currentPosition;
 			float dSqrToTarget = directionToTarget.sqrMagnitude;
 			if (dSqrToTarget < range)
