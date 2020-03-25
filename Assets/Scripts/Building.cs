@@ -62,6 +62,7 @@ public class Building : MonoBehaviour, IBuyable
 
 	public virtual void OnPlace()
 	{
+		PlayerInstance.Instance.BuildingsList.Add(this);
 	}
 
 	public virtual void OnDamageFull()

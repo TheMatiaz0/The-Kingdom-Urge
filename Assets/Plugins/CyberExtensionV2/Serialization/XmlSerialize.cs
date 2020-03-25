@@ -11,7 +11,7 @@ namespace Cyberevolver
     public class SerializeXMl<T>
     {
 
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
 		/// <summary>
 		/// Runs on start of application. Sets PathToSpecificFolder property.
 		/// </summary>
@@ -19,7 +19,7 @@ namespace Cyberevolver
         [UnityEngine.RuntimeInitializeOnLoadMethod]
         public static void Init(string folderName = "Saves")
         {
-            PathToSpecificFolder = System.IO.Path.Combine(UnityEngine.Application.dataPath, folderName);   
+            PathToSpecificFolder = System.IO.Path.Combine(UnityEngine.Application.persistentDataPath, folderName);   
         }
 #endif
         private static string PathToSpecificFolder { get; set; }

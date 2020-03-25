@@ -33,6 +33,11 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	[SerializeField]
 	private GameObject activeUI = null;
 
+	[SerializeField]
+	private Text nicknameText = null;
+
+	public Text NicknameText => nicknameText;
+
 	public bool IsPaused { get; private set; } = true;
 
 	protected void OnEnable()

@@ -14,6 +14,8 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	public double MoneyPerSecond { get { return _MoneyPerSecond; } set { if (_MoneyPerSecond != value) { _MoneyPerSecond = value; } MenuUpdater.Instance.UpdatePerSecondText(this, _MoneyPerSecond); } }
 	private double _MoneyPerSecond;
 
+	public string Nickname { get; set; } = "...";
+
 	public Cint MoneyPerClick { get; private set; } = 1;
 
 	public bool IsGameOver { get; private set; }
@@ -22,6 +24,11 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	private FreezeMenu gameOverManager = null;
 
 	public List<Building> BuildingsList { get; private set; } = new List<Building>();
+
+	protected void Start()
+	{
+		MenuUpdater.Instance.NicknameText.text = $"{Nickname}'s Kingdom";
+	}
 
 	protected void Update()
 	{
