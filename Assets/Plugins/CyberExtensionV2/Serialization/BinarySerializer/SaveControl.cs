@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.IO;
 using System;
+using UnityEngine;
 #if UNITY_STANDALONE
 using UnityEngine;
 #endif
@@ -11,11 +12,11 @@ namespace Cyberevolver
   
     public static class SaveControl
     {
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
         {
-            SetPath(System.IO.Path.Combine(Application.dataPath, "Saves"));
+            SetPath(System.IO.Path.Combine(Application.persistentDataPath, "Saves"));
         }
 #endif
 

@@ -6,6 +6,7 @@ using Cyberevolver;
 using UnityEngine.UI;
 using System;
 
+[Serializable]
 public class Building : MonoBehaviour, IBuyable
 {
 	[SerializeField]
@@ -36,7 +37,9 @@ public class Building : MonoBehaviour, IBuyable
 
 	public string BuildingName => buildingName;
 
-	public Cint CurrentHp { get; private set; } = 100;
+	public Cint CurrentHp { get; set; } = 100;
+
+	private bool onlyOnce;
 
 	public void OnBuy()
 	{
@@ -62,7 +65,7 @@ public class Building : MonoBehaviour, IBuyable
 
 	public virtual void OnPlace()
 	{
-		PlayerInstance.Instance.BuildingsList.Add(this);
+		PlayerInstance.Instance.BuildingList.Add(this);
 	}
 
 	public virtual void OnDamageFull()
@@ -132,7 +135,17 @@ public class Building : MonoBehaviour, IBuyable
 		{
 			case "Grass":
 				PlacementController.Instance.OnCollision();
-				OnPlace();
+
+				if (PlacementController.Instance.ObjToPlace != null)
+				{
+					return;
+				}
+
+				if (onlyOnce == false)
+				{
+					OnPlace();
+					onlyOnce = true;
+				}
 				break;
 		}
 	}

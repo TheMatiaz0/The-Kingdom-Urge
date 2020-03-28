@@ -23,7 +23,7 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 	[SerializeField]
 	private FreezeMenu gameOverManager = null;
 
-	public List<Building> BuildingsList { get; private set; } = new List<Building>();
+	public List<Building> BuildingList { get; private set; } = new List<Building>();
 
 	protected void Start()
 	{
@@ -42,6 +42,35 @@ public class PlayerInstance : AutoInstanceBehaviour<PlayerInstance>
 		if (Input.GetKeyDown(KeyCode.V))
 		{
 			Spawner.Instance.StartSpawn();
+		}
+
+		if (Input.GetKeyDown(KeyCode.F1))
+		{
+			List<BuildingData> buildingsConverted = new List<BuildingData>();
+
+			foreach (Building item in BuildingList)
+			{
+				buildingsConverted.Add(new BuildingData(item.CurrentHp, (Vector2)item.transform.position, item.BuildingName));
+			}
+
+			Kingdom save = new Kingdom(buildingsConverted, Nickname, CurrentMoney);
+
+
+			SaveControl.SaveObject(save, "save#01");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F2))
+		{
+			Kingdom save = SaveControl.TryLoad<Kingdom>("save#01");
+			Nickname = save.Nickname;
+			CurrentMoney = save.CurrentMoney;
+			foreach (BuildingData item in save.BuildingList)
+			{
+				GameObject prefab = Instantiate(Resources.Load<GameObject>($"Prefab/{item.Name}"), item.Position.Vector2, Quaternion.identity, GameObject.FindGameObjectWithTag("BuildingList").transform);
+				Building building = prefab.GetComponent<Building>();
+				building.CurrentHp = item.CurrentHp;
+				building.OnPlace();
+			}
 		}
 	}
 

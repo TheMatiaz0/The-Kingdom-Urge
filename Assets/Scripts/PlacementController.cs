@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class PlacementController : AutoInstanceBehaviour<PlacementController>
 {
 	private GameObject objToPlace = null;
+	public GameObject ObjToPlace => objToPlace;
 	private SpriteRenderer spriteRender = null;
 	private Rigidbody2D rb2D = null;
 
