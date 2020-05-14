@@ -39,8 +39,6 @@ public class Building : MonoBehaviour, IBuyable
 
 	public Cint CurrentHp { get; set; } = 100;
 
-	private bool onlyOnce;
-
 	public void OnPressBuy()
 	{
 		PrepareToPlace();

@@ -72,24 +72,46 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			spriteRender.color = Color.green;
 		}
 
-		if (Input.GetMouseButtonDown(0) == true)
+		if (Input.GetMouseButtonDown(0))
 		{
-			if (b.CanBuy() == false)
-			{
-				return;
-			}
-
-			if (spriteRender != null)
-			{
-				spriteRender.color = Color.white;
-				spriteRender.sortingOrder = 0;
-				spriteRender = null;
-			}
-
-			// one of the ways, also I could use double tap or something like that.
-			camMovement.IsAllowed = true;
-			objToPlace = null;
+			AcceptBuild();
 		}
+
+		else if (Input.GetMouseButtonDown(1))
+		{
+			DenyBuild();
+		}
+	}
+
+	public void AcceptBuild ()
+	{
+		if (b.CanBuy() == false)
+		{
+			return;
+		}
+
+		if (spriteRender != null)
+		{
+			spriteRender.color = Color.white;
+			spriteRender.sortingOrder = 0;
+			spriteRender = null;
+		}
+
+		SetDefault();
+	}
+
+	private void SetDefault()
+	{
+		camMovement.IsAllowed = true;
+		objToPlace = null;
+		spriteRender = null;
+		b = null;
+	}
+
+	public void DenyBuild ()
+	{
+		Destroy(objToPlace);
+		SetDefault();
 	}
 
 	public void OnCollision()
