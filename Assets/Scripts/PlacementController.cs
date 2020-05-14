@@ -40,6 +40,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 		rb2D.bodyType = RigidbodyType2D.Dynamic;
 		b = objToPlace.GetComponent<Building>();
 		camMovement = Camera.main.GetComponent<CamMovement>();
+		camMovement.IsAllowed = false;
 	}
 
 	protected void FixedUpdate()
@@ -85,6 +86,8 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 				spriteRender = null;
 			}
 
+			// one of the ways, also I could use double tap or something like that.
+			camMovement.IsAllowed = true;
 			objToPlace = null;
 		}
 	}
