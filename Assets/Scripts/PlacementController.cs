@@ -22,6 +22,8 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 
 	private Building b = null;
 
+	private CamMovement camMovement = null;
+
 	public bool WrongCollision { get; set; }
 
 	private RaycastHit2D hitLeft;
@@ -37,6 +39,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 		rb2D = objToPlace.GetComponent<Rigidbody2D>();
 		rb2D.bodyType = RigidbodyType2D.Dynamic;
 		b = objToPlace.GetComponent<Building>();
+		camMovement = Camera.main.GetComponent<CamMovement>();
 	}
 
 	protected void FixedUpdate()
@@ -55,10 +58,7 @@ public class PlacementController : AutoInstanceBehaviour<PlacementController>
 			return;
 		}
 
-		else
-		{
-			objToPlace.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		}
+		objToPlace.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		if (hitLeft.transform?.tag != "Grass" || hitRight.transform?.tag != "Grass" || WrongCollision == true || IsInRange(minPoint.position, maxPoint.position, objToPlace.transform.position) == false)
 		{

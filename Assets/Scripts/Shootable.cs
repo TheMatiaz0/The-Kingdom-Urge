@@ -27,8 +27,7 @@ public class Shootable : Building
 	public override void OnPlace()
 	{
 		base.OnPlace();
-
-		// StartCoroutine(ShootWithDelay());
+		StartCoroutine(ShootWithDelay());
 	}
 
 	private IEnumerator ShootWithDelay()
@@ -47,11 +46,5 @@ public class Shootable : Building
 
 			yield return Async.Wait(shootTimerMax.TimeSpan);
 		}
-	}
-
-	public override void Start()
-	{
-		base.Start();
-		StartCoroutine(ShootWithDelay());
 	}
 }

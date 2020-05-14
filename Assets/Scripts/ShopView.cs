@@ -23,7 +23,7 @@ public class ShopView : MonoBehaviour
 			newItemShop.ItemName.text = b.BuildingName;
 			newItemShop.ItemIcon.sprite = b.BuildingIcon;
 			newItemShop.ItemPrice.text = b.BuildingPrice.ToString();
-			newItemShop.itemBuyAction += () => b.OnBuy();
+			newItemShop.itemBuyAction += () => b.OnPressBuy();
 		}
 	}
 }

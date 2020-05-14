@@ -7,5 +7,5 @@ public interface IBuyable
 {
 	Cint BuildingPrice { get; }
 
-	void OnBuy();
+	void OnPressBuy();
 }

@@ -8,4 +8,10 @@ public class Castle : Shootable
 	{
 		PlayerInstance.Instance.SetGameOver();
 	}
+
+	protected override void Start()
+	{
+		base.Start();
+		this.OnPlace();
+	}
 }

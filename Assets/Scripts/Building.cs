@@ -41,9 +41,9 @@ public class Building : MonoBehaviour, IBuyable
 
 	private bool onlyOnce;
 
-	public void OnBuy()
+	public void OnPressBuy()
 	{
-		Place();
+		PrepareToPlace();
 	}
 
 	public bool CanBuy ()
@@ -95,16 +95,16 @@ public class Building : MonoBehaviour, IBuyable
 		LeanTween.color(this.gameObject, Color.white, 2f);
 	}
 
-	public virtual void Start()
+	protected virtual void Start()
 	{
 		CurrentHp = startHp;
 	}
 
-	public virtual void Update ()
+	protected virtual void Update ()
 	{
 	}
 	
-	private void Place() 
+	private void PrepareToPlace() 
 	{
 		PlacementController.Instance.SetupPlacement(this.gameObject);
 	}
@@ -141,11 +141,11 @@ public class Building : MonoBehaviour, IBuyable
 					return;
 				}
 
-				if (onlyOnce == false)
+				if (!PlayerInstance.Instance.BuildingList.Contains(this))
 				{
 					OnPlace();
-					onlyOnce = true;
 				}
+
 				break;
 		}
 	}

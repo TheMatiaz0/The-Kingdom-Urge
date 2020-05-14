@@ -14,6 +14,7 @@ public class CamMovement : MonoBehaviour
     private float zoomOutMax = 8;
 
     private bool isFocused = false;
+    public bool IsAllowed { get; set; } = true;
 
     protected void Awake()
     {
@@ -27,7 +28,7 @@ public class CamMovement : MonoBehaviour
 
     protected void LateUpdate()
     {
-        if (isFocused == false || MenuUpdater.Instance.IsPaused)
+        if (isFocused == false || MenuUpdater.Instance.IsPaused || IsAllowed == false)
             return;
 
         if (Input.GetMouseButtonDown(0))
