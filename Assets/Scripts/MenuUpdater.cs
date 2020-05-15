@@ -54,6 +54,7 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	{
 		PlayerInstance player = PlayerInstance.Instance;
 		player.CurrentMoney += player.MoneyPerClick;
+		LeanTween.scale(coinButton, scale, animationSpeed).setEase(easeTypeIn).setOnComplete(() => LeanTween.scale(coinButton, new Vector2(1, 1), animationSpeed / 2).setEase(easeTypeOut));
 	}
 
 	protected void OnDisable()
@@ -68,12 +69,12 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 
 	public void OnCoinPointerEnter ()
 	{
-		LeanTween.scale(coinButton, scale, animationSpeed).setEase(easeTypeIn);
+		// LeanTween.scale(coinButton, scale, animationSpeed).setEase(easeTypeIn);
 	}
 
 	public void OnCoinPointerExit ()
 	{
-		LeanTween.scale(coinButton, new Vector2(1, 1), animationSpeed).setEase(easeTypeOut);
+		// LeanTween.scale(coinButton, new Vector2(1, 1), animationSpeed).setEase(easeTypeOut);
 	}
 
 	public void ChangeViewToActive ()

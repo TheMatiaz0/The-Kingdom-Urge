@@ -6215,11 +6215,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldInfo: {fileID: 266836117}
   perSecondInfo: {fileID: 1195114476}
-  easeTypeIn: 23
-  easeTypeOut: 24
-  animationSpeed: 0.4
+  easeTypeIn: 14
+  easeTypeOut: 15
+  animationSpeed: 0.2
   coinButton: {fileID: 1377133334}
-  scale: {x: 1.15, y: 1.15}
+  scale: {x: 1.2, y: 1.2}
   activeUI: {fileID: 1497068176}
   nicknameText: {fileID: 907891248}
 --- !u!1 &1358625005
