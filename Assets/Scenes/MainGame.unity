@@ -6221,6 +6221,7 @@ MonoBehaviour:
   coinButton: {fileID: 1377133334}
   scale: {x: 1.2, y: 1.2}
   activeUI: {fileID: 1497068176}
+  popUpCoinEffect: {fileID: 1445613723, guid: e3a3e307a2ad04a42965ec5cb20a70a2, type: 3}
   nicknameText: {fileID: 907891248}
 --- !u!1 &1358625005
 GameObject:

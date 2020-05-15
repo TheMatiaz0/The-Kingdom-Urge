@@ -34,6 +34,9 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 	private GameObject activeUI = null;
 
 	[SerializeField]
+	private PopupCoin popUpCoinEffect = null;
+
+	[SerializeField]
 	private Text nicknameText = null;
 
 	public Text NicknameText => nicknameText;
@@ -55,6 +58,8 @@ public class MenuUpdater : AutoInstanceBehaviour<MenuUpdater>
 		PlayerInstance player = PlayerInstance.Instance;
 		player.CurrentMoney += player.MoneyPerClick;
 		LeanTween.scale(coinButton, scale, animationSpeed).setEase(easeTypeIn).setOnComplete(() => LeanTween.scale(coinButton, new Vector2(1, 1), animationSpeed / 2).setEase(easeTypeOut));
+		GameObject newPopUp = Instantiate(popUpCoinEffect.gameObject, (Vector2)Input.mousePosition, Quaternion.identity, coinButton.transform);
+		// PopupCoin pcoin = newPopUp.GetComponent<PopupCoin>();
 	}
 
 	protected void OnDisable()
